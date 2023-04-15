@@ -2,7 +2,7 @@
 Display the orientation of HMC5883L with ESP32
 
 First, find the offset value for each axis.   
-As you can see, the X and Y axes are quite off-center.   
+As you can see, each axis is quite off-center.   
 ![hmc5883l-calib-1](https://user-images.githubusercontent.com/6020549/232182195-a9fb53d5-d6fc-4382-9a82-28cdb911a82d.jpg)
 
 And display the orientation.   
