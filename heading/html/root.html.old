@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" type="text/css" href="main.css">
+	<script src="//cdn.rawgit.com/Mikhus/canvas-gauges/gh-pages/download/2.1.7/all/gauge.min.js"></script>
+	<script src="https://unpkg.com/three@0.147.0/build/three.min.js"></script>
+	<title>Heading Meter</title>
+</head>
+
+<body>
+	<h1 id="header"></h1>
+
+	<div>
+	<canvas id="canvas1"></canvas>
+	<canvas id="canvas2"></canvas>
+	</div>
+
+	<script>
+		function onClick(e) {
+			//console.log('onClick');
+				document.getElementById("canvas1").style.display = "none";
+				document.getElementById("canvas2").style.display = "inline-block";
+				_canvas = 2;
+			} else {
+				document.getElementById("canvas1").style.display = "inline-block";
+				document.getElementById("canvas2").style.display = "none";
+				_canvas = 1;
+			}
+		}
+
+		var gauge1 = new RadialGauge({
+			renderTo: 'canvas1',
+			width: 400,
+			height: 400,
+			title: "Heading",
+			units: "Deg",
+			minValue: 0,
+			maxValue: 360,
+			majorTicks: [
+				"0", "45", "90", "135", "180", "225", "270", "225" ,"0"
+			],
+			minorTicks: 3,
+			ticksAngle: 360,
+			startAngle: 180,
+			highlights: false,
+			strokeTicks: true,
+			colorMajorTicks: "#ddd",
+			colorMinorTicks: "#ddd",
+			colorTitle: "#eee",
+			colorUnits: "#ccc",
+			colorNumbers: "#eee",
+			//colorPlate: "#fff",
+			colorPlate: "#222",
+			valueBox: true,
+			valueTextShadow: false,
+			borderShadowWidth: 0,
+			borders: true,
+			colorBorderOuter: "#333",
+			colorBorderOuterEnd: "#111",
+			//colorBorderMiddle: "#222",
+			//colorBorderMiddleEnd: "#111",
+			colorBorderInner: "#111",
+			colorBorderInnerEnd: "#333",
+			needleType: "arrow",
+			needleWidth: 2,
+			needleCircleSize: 7,
+			needleCircleOuter: true,
+			needleCircleInner: false,
+			animationDuration: 1500,
+			animationRule: "linear"
+		}).draw();
+
+		var gauge2 = new RadialGauge({
+			renderTo: 'canvas2',
+			width: 400,
+			height: 400,
+			title: "Heading",
+			units: "Deg",
+			minValue: 0,
+			maxValue: 360,
+			majorTicks: [
+				"N",
+				"NE",
+				"E",
+				"SE",
+				"S",
+				"SW",
+				"W",
+				"NW",
+				"N"
+			],
+			minorTicks: 22,
+			ticksAngle: 360,
+			startAngle: 180,
+			strokeTicks: false,
+			highlights: false,
+			colorPlate: "#222",
+			colorMajorTicks: "#f5f5f5",
+			colorMinorTicks: "#ddd",
+			colorNumbers: "#ccc",
+			colorNeedle: "rgba(240, 128, 128, 1)",
+			colorNeedleEnd: "rgba(255, 160, 122, .9)",
+			colorTitle: "#eee",
+			colorUnits: "#ccc",
+			valueBox: true,
+			valueTextShadow: false,
+			colorCircleInner: "#fff",
+			colorNeedleCircleOuter: "#ccc",
+			needleCircleSize: 15,
+			needleCircleOuter: false,
+			animationRule: "linear",
+			needleType: "line",
+			needleStart: 75,
+			needleEnd: 99,
+			needleWidth: 3,
+			borders: true,
+			borderInnerWidth: 0,
+			borderMiddleWidth: 0,
+			borderOuterWidth: 10,
+			colorBorderOuter: "#ccc",
+			colorBorderOuterEnd: "#ccc",
+			colorNeedleShadowDown: "#222",
+			borderShadowWidth: 0,
+			animationTarget: "plate",
+			colorTitle: "#f5f5f5",
+			animationDuration: 1500
+		}).draw();
+
+		_canvas = 1;
+
+		document.getElementById("canvas1").style.display = "inline-block";
+		document.getElementById("canvas2").style.display = "none";
+
+		var canvas1 = document.getElementById('canvas1');
+		canvas1.addEventListener('click', onClick, false);
+		var canvas2 = document.getElementById('canvas2');
+		canvas2.addEventListener('click', onClick, false);
+
+	</script>
+
+	<script type="text/javascript" src="main.js"></script>
+</body>
+</html>
+
