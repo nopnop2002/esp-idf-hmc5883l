@@ -101,7 +101,7 @@ or
 http://esp32.local/
 ```
 
-![hmc5883l-heading-1](https://user-images.githubusercontent.com/6020549/232182731-8f6870b9-8ce6-4d14-a39c-34c1a8123ef7.jpg)
 Click the mouse to change the display.   
+![hmc5883l-heading-1](https://user-images.githubusercontent.com/6020549/232182731-8f6870b9-8ce6-4d14-a39c-34c1a8123ef7.jpg)
 ![hmc5883l-heading-2](https://user-images.githubusercontent.com/6020549/232182732-710a315a-c8bc-406b-b39a-d050e84b6a26.jpg)
 
