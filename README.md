@@ -9,8 +9,9 @@ And display the orientation.
 ![hmc5883l-heading-1](https://user-images.githubusercontent.com/6020549/232182731-8f6870b9-8ce6-4d14-a39c-34c1a8123ef7.jpg)
 
 # Software requiment
-ESP-IDF V4.4/V5.0.   
+ESP-IDF V4.4/V5.x.   
 ESP-IDF V5.0 is required when using ESP32-C2.   
+ESP-IDF V5.1 is required when using ESP32-C6.   
 
 
 # Hardware requirements
@@ -18,7 +19,7 @@ HMC5883L 3-axis Electronic Compass
 
 
 # Wireing
-|HMC5883L||ESP32|ESP32-S2/S3|ESP32-C2/C3||
+|HMC5883L||ESP32|ESP32-S2/S3|ESP32-C2/C3/C6||
 |:-:|:-:|:-:|:-:|:-:|:-:|
 |VCC|--|3.3V|3.3V|3.3V||
 |GND|--|GND|GND|GND||
@@ -34,7 +35,7 @@ HMC5883L 3-axis Electronic Compass
 ```
 git clone https://github.com/nopnop2002/esp-idf-hmc5883l
 cd esp-idf-hmc5883l/calibrate
-idf.py set-target {esp32/esp32s2/esp32s3/esp32c2/esp32c3}
+idf.py set-target {esp32/esp32s2/esp32s3/esp32c2/esp32c3/esp32c6}
 idf.py menuconfig
 idf.py flash
 ```
@@ -76,7 +77,7 @@ If you set the offset you got from the calibration and run it again, the circle 
 ```
 git clone https://github.com/nopnop2002/esp-idf-hmc5883l
 cd esp-idf-hmc5883l/heading
-idf.py set-target {esp32/esp32s2/esp32s3/esp32c2/esp32c3}
+idf.py set-target {esp32/esp32s2/esp32s3/esp32c2/esp32c3/esp32c6}
 idf.py menuconfig
 idf.py flash
 ```
