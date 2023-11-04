@@ -84,7 +84,7 @@ void app_main(void)
 	ws_server_start();
 
 	// Start web server
-	xTaskCreate(&server_task, "SERVER", 1024*2, (void *)cparam0, 5, NULL);
+	xTaskCreate(&server_task, "SERVER", 1024*3, (void *)cparam0, 5, NULL);
 
 	// Start web client
 	xTaskCreate(&client_task, "CLIENT", 1024*3, (void *)0x111, 5, NULL);
