@@ -18,6 +18,8 @@ ESP-IDF V5.1 is required when using ESP32-C6.
 # Hardware requirements
 HMC5883L 3-axis Electronic Compass   
 
+__Note__   
+HMC5883L and QMC5883L are completely incompatible chips.   
 
 # Wireing
 |HMC5883L||ESP32|ESP32-S2/S3|ESP32-C2/C3/C6||
