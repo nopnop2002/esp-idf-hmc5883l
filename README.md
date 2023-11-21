@@ -89,7 +89,7 @@ idf.py flash
 ### Configuration   
 Sets the compass offset obtained by calibration.   
 ![config-top](https://user-images.githubusercontent.com/6020549/229249348-21ca8f80-e976-4ddb-8bca-435c475a3290.jpg)
-![config-app](https://user-images.githubusercontent.com/6020549/229249346-0da21399-9640-4708-bdb6-beed7549d55a.jpg)
+![config-app](https://user-images.githubusercontent.com/6020549/232182280-c2ddc0bc-f2c2-462f-a6f2-d8a6e9664344.jpg)
 
 
 ### View orientation   
