@@ -71,12 +71,7 @@ If you set the offset you got from the calibration and run it again, the circle 
 ![hmc5883l-calib-2](https://user-images.githubusercontent.com/6020549/232182196-d71d4259-d06d-4207-a8a0-92eab2f3b20e.jpg)
 
 
-
-
 # Display the orientation   
-
-
-
 ```
 git clone https://github.com/nopnop2002/esp-idf-hmc5883l
 cd esp-idf-hmc5883l/heading
@@ -109,5 +104,6 @@ Click the mouse to change the display.
 
 WEB pages are stored in the html folder.   
 I used [this](https://canvas-gauges.com/) for gauge display.   
+All Configuration Options for the gauge display is [here](https://canvas-gauges.com/documentation/user-guide/configuration).   
 You can change the design and color according to your preference.   
 
