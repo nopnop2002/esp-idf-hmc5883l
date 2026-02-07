@@ -103,6 +103,6 @@ Click the mouse to change the display.
 
 WEB pages are stored in the html folder.   
 I used [this](https://canvas-gauges.com/) for gauge display.   
-All Configuration Options for the gauge display is [here](https://canvas-gauges.com/documentation/user-guide/configuration).   
+Configuration Options for the gauge display is [here](https://canvas-gauges.com/documentation/user-guide/configuration).   
 You can change the design and color according to your preference.   
 
