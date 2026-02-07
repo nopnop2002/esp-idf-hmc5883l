@@ -1,6 +1,5 @@
 # esp-idf-hmc5883l
 Display the orientation of HMC5883L with ESP32.   
-I used [this](https://github.com/jrowberg/i2cdevlib/tree/master/Arduino) I2Cdev library collection by Jeff Rowberg.   
 
 First, find the offset value for each axis.   
 As you can see, each axis is quite off-center.   
