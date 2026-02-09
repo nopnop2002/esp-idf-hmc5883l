@@ -14,20 +14,13 @@ static const char *TAG = "MAIN";
 static const char *MDNS_HOSTNAME = "esp32";
 
 extern "C" {
-	void app_main(void);
-}
-
-#ifdef __cplusplus
-extern "C" {
-#endif
 	void start_wifi(void);
 	void start_mdns(void);
 	int ws_server_start(void);
 	void server_task(void *pvParameters);
 	void client_task(void *pvParameters);
-#ifdef __cplusplus
+	void app_main(void);
 }
-#endif
 
 void hmc5883l(void *pvParameters);
 
@@ -57,7 +50,7 @@ void app_main(void)
 	start_mdns();
 
 	// Initialize i2c
-	I2Cdev::initialize(400000);
+	I2Cdev::initialize();
 
 	// Create Message Buffer
 	xMessageBufferToClient = xMessageBufferCreate(1024);
