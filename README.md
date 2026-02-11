@@ -5,7 +5,7 @@ First, find the offset value for each axis.
 As you can see, each axis is quite off-center.   
 ![hmc5883l-calib-1](https://user-images.githubusercontent.com/6020549/232182195-a9fb53d5-d6fc-4382-9a82-28cdb911a82d.jpg)
 
-And display the orientation.   
+It then displays the orientation based on the geomagnetic field.   
 ![hmc5883l-heading-1](https://user-images.githubusercontent.com/6020549/232182731-8f6870b9-8ce6-4d14-a39c-34c1a8123ef7.jpg)
 
 # Software requiment
@@ -70,7 +70,7 @@ If you set the offset you got from the calibration and run it again, the circle 
 ![hmc5883l-calib-2](https://user-images.githubusercontent.com/6020549/232182196-d71d4259-d06d-4207-a8a0-92eab2f3b20e.jpg)
 
 
-# Display the orientation   
+# Show orientation   
 ```
 git clone https://github.com/nopnop2002/esp-idf-hmc5883l
 cd esp-idf-hmc5883l/heading
@@ -86,7 +86,7 @@ Sets the compass offset obtained by calibration.
 ![config-app](https://user-images.githubusercontent.com/6020549/232182280-c2ddc0bc-f2c2-462f-a6f2-d8a6e9664344.jpg)
 
 
-### View orientation   
+### Show orientation   
 ESP32 acts as a web server.   
 I used [this](https://github.com/Molorius/esp32-websocket) component.   
 This component can communicate directly with the browser.   
@@ -106,3 +106,47 @@ I used [this](https://canvas-gauges.com/) for gauge display.
 Configuration Options for the gauge display is [here](https://canvas-gauges.com/documentation/user-guide/configuration).   
 You can change the design and color according to your preference.   
 
+# Show orientation using panda3d library   
+The ESP32 provides the measured angle over UDP.   
+panda.py acts as a UDP display server.   
+The Earth's angle follows the sensor angle.   
+I used [this](https://www.panda3d.org/) library.   
+The earth texture was borrowed from [here](https://science.nasa.gov/earth/earth-observatory/blue-marble-next-generation/base-map/).   
+
+```
++-------------+          +-------------+          +-------------+
+|             |          |             |          |             |
+|  HMC5883L   |--(ic2)-->|    ESP32    |--(UDP)-->|  panda.py   |
+|             |          |             |          |             |
++-------------+          +-------------+          +-------------+
+```
+
+### Installation for Linux
+```
+$ python3 --version
+Python 3.11.2
+$ sudo apt install python3-pip python3-setuptools
+$ python3 -m pip install -U pip
+$ python3 -m pip install panda3d
+$ python3 -m pip install numpy
+$ git clone https://github.com/nopnop2002/esp-idf-ak8975
+$ cd esp-idf-ak8975/panda3d
+$ python3 panda.py
+```
+![Image](https://github.com/user-attachments/assets/07887a5a-3a08-48c0-a0fd-c5e1f06d9db0)
+
+### Installation for Windows
+Install Git for Windows from [here](https://gitforwindows.org/).   
+Install Python Releases for Windows from [here](https://www.python.org/downloads/windows/).   
+Open Git Bash and run:   
+```
+$ python --version
+Python 3.11.9
+$ python -m pip install -U pip
+$ python -m pip install panda3d
+$ python -m pip install numpy
+$ git clone https://github.com/nopnop2002/esp-idf-ak8975
+$ cd esp-idf-ak8975/panda3d
+$ python panda.py
+```
+![Image](https://github.com/user-attachments/assets/1e60fd2f-8d9a-4b3d-98a2-e538b1964bf8)

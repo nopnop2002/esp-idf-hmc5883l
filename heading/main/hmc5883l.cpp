@@ -3,13 +3,17 @@
 
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+#include "freertos/queue.h"
 #include "freertos/message_buffer.h"
 #include "esp_timer.h"
 #include "esp_log.h"
 #include "esp_err.h"
 #include "cJSON.h"
 
+#include "parameter.h"
+
 extern MessageBufferHandle_t xMessageBufferToClient;
+extern QueueHandle_t xQueueTrans;
 
 static const char *TAG = "MAG";
 
@@ -24,53 +28,53 @@ static const char *TAG = "MAG";
 HMC5883L mag(HMC5883L_DEFAULT_ADDRESS);
 
 void hmc5883l(void *pvParameters){
-    // Initialize HMC5883L
-    // The number of samples averaged per measured output is 8.
-    // Data Output Rate is 15Hz.
-    // Normal measurement configuration.
-    // -1.3Ga-->+1.3Ga 1090 counts / Gauss
-    // Single-Measurement Mode.
-    mag.initialize(400000);
+	// Initialize HMC5883L
+	// The number of samples averaged per measured output is 8.
+	// Data Output Rate is 15Hz.
+	// Normal measurement configuration.
+	// -1.3Ga-->+1.3Ga 1090 counts / Gauss
+	// Single-Measurement Mode.
+	mag.initialize(400000);
 
-    // Verify the I2C connection
-    if (!mag.testConnection()) {
-        ESP_LOGE(TAG, "HMC5883L not found");
-        vTaskDelete(NULL);
-    }
+	// Verify the I2C connection
+	if (!mag.testConnection()) {
+		ESP_LOGE(TAG, "HMC5883L not found");
+		vTaskDelete(NULL);
+	}
 
-    // Verify identification byte A
-    uint8_t ida = mag.getIDA();
-    ESP_LOGI(TAG, "ida=0x%x", ida);
-    if (ida != 0x48) {
-        ESP_LOGE(TAG, "Identification Register A not correct [0x%x]", ida);
-        vTaskDelete(NULL);
-    }
+	// Verify identification byte A
+	uint8_t ida = mag.getIDA();
+	ESP_LOGI(TAG, "ida=0x%x", ida);
+	if (ida != 0x48) {
+		ESP_LOGE(TAG, "Identification Register A not correct [0x%x]", ida);
+		vTaskDelete(NULL);
+	}
 
-    // Verify identification byte B
-    uint8_t idb = mag.getIDB();
-    ESP_LOGI(TAG, "idb=0x%x", idb);
-    if (idb != 0x34) {
-        ESP_LOGE(TAG, "Identification Register B not correct [0x%x]", idb);
-        vTaskDelete(NULL);
-    }
+	// Verify identification byte B
+	uint8_t idb = mag.getIDB();
+	ESP_LOGI(TAG, "idb=0x%x", idb);
+	if (idb != 0x34) {
+		ESP_LOGE(TAG, "Identification Register B not correct [0x%x]", idb);
+		vTaskDelete(NULL);
+	}
 
-    // Verify identification byte C
-    uint8_t idc = mag.getIDC();
-    ESP_LOGI(TAG, "idc=0x%x", idc);
-    if (idc != 0x33) {
-        ESP_LOGE(TAG, "Identification Register C not correct [0x%x]", idc);
-        vTaskDelete(NULL);
-    }
+	// Verify identification byte C
+	uint8_t idc = mag.getIDC();
+	ESP_LOGI(TAG, "idc=0x%x", idc);
+	if (idc != 0x33) {
+		ESP_LOGE(TAG, "Identification Register C not correct [0x%x]", idc);
+		vTaskDelete(NULL);
+	}
 
 	while(1){
-        // Read raw data from mag. Units don't care.
-        if (mag.getReadyStatus()) {
-            int16_t mx, my, mz;
-            mag.getHeading(&mx, &my, &mz);
-            ESP_LOGD(TAG, "mag=%d %d %d", mx, my, mz);
-            mx = mx + CONFIG_MAGX;
-            my = my + CONFIG_MAGY;
-            mz = mz + CONFIG_MAGZ;
+		// Read raw data from mag. Units don't care.
+		if (mag.getReadyStatus()) {
+			int16_t mx, my, mz;
+			mag.getHeading(&mx, &my, &mz);
+			ESP_LOGD(TAG, "mag=%d %d %d", mx, my, mz);
+			mx = mx + CONFIG_MAGX;
+			my = my + CONFIG_MAGY;
+			mz = mz + CONFIG_MAGZ;
 			float _mx, _my, _mz; 
 			_mx = (float)mx;
 			_my = (float)my;
@@ -81,6 +85,15 @@ void hmc5883l(void *pvParameters){
 			while (heading < 0) heading += 360;
 			while (heading > 360) heading -= 360;
 			ESP_LOGI(TAG, "heading=%f", heading);
+
+			// Send UDP packet
+			POSE_t pose;
+			pose.roll = 0.0;
+			pose.pitch = 0.0;
+			pose.yaw = heading;
+			if (xQueueSend(xQueueTrans, &pose, 100) != pdPASS ) {
+				ESP_LOGE(pcTaskGetName(NULL), "xQueueSend fail");
+			}
 
 			// Send WEB request
 			cJSON *request;
