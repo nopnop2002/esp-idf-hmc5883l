@@ -9,10 +9,8 @@ It then displays the orientation based on the geomagnetic field.
 ![hmc5883l-heading-1](https://user-images.githubusercontent.com/6020549/232182731-8f6870b9-8ce6-4d14-a39c-34c1a8123ef7.jpg)
 
 # Software requiment
-ESP-IDF V4.4/V5.x.   
-ESP-IDF V5.0 is required when using ESP32-C2.   
-ESP-IDF V5.1 is required when using ESP32-C6.   
-
+ESP-IDF V5.2 or later.   
+Because this project uses the new I2C driver.   
 
 # Hardware requirements
 HMC5883L 3-axis Electronic Compass   
