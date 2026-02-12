@@ -8,7 +8,7 @@ As you can see, each axis is quite off-center.
 It then displays the orientation based on the geomagnetic field.   
 ![hmc5883l-heading-1](https://user-images.githubusercontent.com/6020549/232182731-8f6870b9-8ce6-4d14-a39c-34c1a8123ef7.jpg)
 
-# Software requiment
+# Software requirements
 ESP-IDF V5.2 or later.   
 Because this project uses the new I2C driver.   
 
